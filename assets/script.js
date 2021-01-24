@@ -5,6 +5,18 @@ $("#currentDay").text(date);
 //ask for current hour
 var currentHour = parseInt(moment().format("H")); 
 
+var ls = localStorage
+
+$("button").on("click", function(event) {
+    var arr = this.id.split("-");
+    var calendarEntryId = arr[1];
+    var calendarTextElement = '#' + calendarEntryId;
+    var calendarText = $(calendarTextElement).val();
+
+    // Save to local storage
+    ls.setItem(calendarEntryId, calendarText);
+    }
+); 
 
 //loop through past, present, future based on time
 $("textarea").each(function() {
@@ -13,6 +25,11 @@ $("textarea").each(function() {
         $(this).removeClass('present');
         $(this).removeClass('past');
         $(this).removeClass('future');
+
+        // Retrieve from local storage
+        if(ls.getItem(calendarHour) != null) {
+            $(this).val(ls.getItem(calendarHour));
+        }
 
         if (calendarHour < currentHour) {
         $(this).addClass("past")
@@ -29,3 +46,4 @@ $("textarea").each(function() {
 }) 
 
 
+ls.getItem(calendarEntryId, calendarText);
