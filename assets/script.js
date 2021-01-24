@@ -1,33 +1,26 @@
 // Display current day
-/* var date = function() {
-    date = moment();
-    datetime.html(date.format('dddd, MMMM Do YYYY, h:mm:ss a'));
-}; */
+var date = moment().format('MMMM Do YYYY');
+$("#currentDay").text(date);
 
-var updateInfo = function () {
-    date = moment();
-    datetime.html(date.format('dddd, MMMM Do YYYY, h:mm:ss a'));
-};
-
-$(document).ready(function() {
-    datetime = $('#currentDay')
-    updateInfo();
-    setInterval(updateInfo, 1000);
-    refresh();
-}); 
-
-var refresh = function() {
-
-}
-/*moment().format('MMMM Do YYYY, h:mm:ss a');
-document.getElementById("currentDay").innerHTML = date; */
-
+//ask for current hour
 var currentHour = moment().format("H"); 
 
-/*$(".info").on("click", ".info-item", function() {
-    console.log("You did it!");
-}); */
 
-/*$(document).ready(function() {
-    date = 
-}) */
+//loop through past, present, future based on time
+$("textarea").each(function() {
+    for(i = 0; i < 9; i++) {
+        if (currentHour > i) {
+        $("textarea").addClass("past")
+        }
+        if (currentHour < i) {
+            $("textarea").addClass("present")
+        }
+        if (currentHour === i) {
+            $("textarea").addClass("future")
+        }
+    }
+
+    console.log("textarea");
+})
+
+
