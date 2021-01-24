@@ -3,24 +3,29 @@ var date = moment().format('MMMM Do YYYY');
 $("#currentDay").text(date);
 
 //ask for current hour
-var currentHour = moment().format("H"); 
+var currentHour = parseInt(moment().format("H")); 
 
 
 //loop through past, present, future based on time
 $("textarea").each(function() {
-    for(i = 0; i < 9; i++) {
-        if (currentHour > i) {
-        $("textarea").addClass("past")
+    var calendarHour = parseInt(this.id);
+
+        $(this).removeClass('present');
+        $(this).removeClass('past');
+        $(this).removeClass('future');
+
+        if (calendarHour < currentHour) {
+        $(this).addClass("past")
+        } 
+        else if (calendarHour === currentHour) {
+            $(this).addClass("present")
         }
-        if (currentHour < i) {
-            $("textarea").addClass("present")
+        else if (calendarHour > currentHour) {
+            $(this).addClass("future")
         }
-        if (currentHour === i) {
-            $("textarea").addClass("future")
-        }
-    }
+    
 
     console.log("textarea");
-})
+}) 
 
 
